@@ -7,8 +7,8 @@ This is an example implementation which will be improved upon the series of arti
 
 Make sure you have Node and NPM installed on your workspace.
 
- - Node: v16.9.0 or greater
- - NPM: 7.21.1 or greater
+ - Node: v20.0.0 or greater
+ - NPM: 10.0.0 or greater
 
 **Build**
 ```
@@ -18,6 +18,7 @@ npm run build
 **Run**
 
 ```
-npm run start
+npm run dev
 
 ```
+*NOTE*: Make Sure that the Websocket service is running

@@ -1,41 +1,15 @@
-import React from "react";
 import MonacoEditor, { EditorDidMount } from "react-monaco-editor";
-import * as monaco from 'monaco-editor';
-import { MonacoServices } from "monaco-languageclient";
-
-const MONACO_OPTIONS: monaco.editor.IEditorConstructionOptions = {
-    autoIndent: "full",
-    automaticLayout: true,
-    contextmenu: true,
-    fontFamily: "monospace",
-    fontSize: 13,
-    lineHeight: 24,
-    hideCursorInOverviewRuler: true,
-    matchBrackets: "always",
-    minimap: {
-        enabled: false,
-    },
-    readOnly: false,
-    scrollbar: {
-        horizontalSliderSize: 4,
-        verticalSliderSize: 18,
-    },
-};
+import { connectToLs } from "../ls-client/ws-client";
+import { HELLO_LANG_ID, MONACO_OPTIONS } from "./constants";
+import { createModel, registerLanguage } from "./util";
 
 export function Editor() {
     const editorDidMount: EditorDidMount = (editor) => {
-        MonacoServices.install(monaco as any);
-        if (editor && editor.getModel()) {
-            const editorModel = editor.getModel();
-            if (editorModel) {
-                editorModel.setValue('{\n    "sayHello": "hello"\n}');
-            }
-        }
+        registerLanguage();
+        const model = createModel();
+        editor.setModel(model);
+        connectToLs();
         editor.focus();
-    };
-
-    const onChange = (newCode: string, event: monaco.editor.IModelContentChangedEvent) => {
-        console.log('onChange', newCode);
     };
 
     return (
@@ -47,10 +21,9 @@ export function Editor() {
                 <MonacoEditor
                     width="100%"
                     height="80vh"
-                    language="json"
+                    language={HELLO_LANG_ID}
                     theme="vs"
                     options={MONACO_OPTIONS}
-                    onChange={onChange}
                     editorDidMount={editorDidMount}
                 />
             </div>
