@@ -1,7 +1,7 @@
 import * as monaco from 'monaco-editor';
 
-export const HELLO_LANG_ID = "hello";
-export const HELLO_LANG_EXTENSION = ".hello";
+export const HELLO_LANG_ID = "json";
+export const HELLO_LANG_EXTENSION = ".json";
 export const MONACO_OPTIONS: monaco.editor.IEditorConstructionOptions = {
     autoIndent: "full",
     automaticLayout: true,
@@ -12,7 +12,7 @@ export const MONACO_OPTIONS: monaco.editor.IEditorConstructionOptions = {
     hideCursorInOverviewRuler: true,
     matchBrackets: "always",
     minimap: {
-        enabled: false,
+        enabled: true,
     },
     readOnly: false,
     scrollbar: {
